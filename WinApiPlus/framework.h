@@ -4,4 +4,5 @@
 // Windows 헤더 파일
 #include <windows.h>
 #include <string>
+#include <map>
 using namespace std;
