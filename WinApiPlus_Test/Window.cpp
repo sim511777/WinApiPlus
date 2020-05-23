@@ -1,23 +1,19 @@
 #include "pch.h"
 #include "Window.h"
+#include "Application.h"
 
-map<HWND, Window*> wndMap;
-Window::Window(HWND _handle) {
-    handle = handle;
-    wndMap[handle] = this;
-}
+//Window::Window(HWND _handle) {
+//    handle = _handle;
+//    Application::wndMap[handle] = this;
+//}
 
 Window::~Window() {
-    wndMap.erase(handle);
-}
-
-void Window::SetParent(Window* window) {
-    ::SetParent(handle, window->handle);
+    Application::wndMap.erase(handle);
 }
 
 Window* Window::GetParent() {
     HWND parentHandle = ::GetParent(handle);
-    return wndMap[parentHandle];
+    return Application::wndMap[parentHandle];
 }
 
 void Window::SetText(wstring text) {
@@ -32,11 +28,15 @@ wstring Window::GetText() {
 }
 
 void Window::SetRect(RECT rect) {
-    ::MoveWindow(handle, rect.left, rect.top, rect.right - rect.left, rect.bottom - rect.top);
+    ::MoveWindow(handle, rect.left, rect.top, rect.right - rect.left, rect.bottom - rect.top, true);
 }
 
 RECT Window::GetRect() {
     RECT rect;
     ::GetWindowRect(handle, &rect);
     return rect;
+}
+
+void Window::Show() {
+    ::ShowWindow(handle, SW_SHOWDEFAULT);
 }
