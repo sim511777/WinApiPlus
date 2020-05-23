@@ -1,0 +1,2 @@
+#define WINAPIPLUS_API __declspec(dllexport)
+#define WINAPIPLUS_API __declspec(dllimport)
